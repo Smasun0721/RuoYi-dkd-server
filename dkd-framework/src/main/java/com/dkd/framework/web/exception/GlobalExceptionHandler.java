@@ -3,6 +3,7 @@ package com.dkd.framework.web.exception;
 import javax.servlet.http.HttpServletRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.validation.BindException;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
@@ -135,4 +136,34 @@ public class GlobalExceptionHandler
     {
         return AjaxResult.error("演示模式，不允许操作");
     }
+
+    /**
+     * 数据完整性异常处理
+     */
+    @ExceptionHandler(DataIntegrityViolationException.class)
+    public AjaxResult handleDataIntegrityViolationException(DataIntegrityViolationException e) {
+        String message = "删除失败：存在关联数据，请先删除相关数据后再尝试删除";
+        
+        // 根据具体的外键约束名称提供更精确的错误信息
+        if (e.getMessage() != null) {
+            String errorMessage = e.getMessage();
+            
+            // 合作商外键约束：tb_node表中partner_id关联到tb_partner
+            if (errorMessage.contains("tb_node_ibfk_2") || 
+                errorMessage.contains("partner_id") ||
+                (errorMessage.contains("tb_node") && errorMessage.contains("tb_partner"))) {
+                message = "删除失败：该合作商下存在关联的节点数据，请先删除相关节点数据后再尝试删除";
+            }
+            // 区域管理外键约束：tb_node表中region_id关联到tb_region
+            else if (errorMessage.contains("tb_node_ibfk_1") || 
+                     errorMessage.contains("region_id") ||
+                     (errorMessage.contains("tb_node") && errorMessage.contains("tb_region"))) {
+                message = "删除失败：该区域下存在关联的节点数据，请先删除相关节点数据后再尝试删除";
+            }
+        }
+        
+        return AjaxResult.error(message);
+    }
+
+
 }
