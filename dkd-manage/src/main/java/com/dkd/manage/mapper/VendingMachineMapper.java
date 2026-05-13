@@ -2,6 +2,8 @@ package com.dkd.manage.mapper;
 
 import java.util.List;
 import com.dkd.manage.domain.VendingMachine;
+import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 设备管理Mapper接口
@@ -9,7 +11,8 @@ import com.dkd.manage.domain.VendingMachine;
  * @author Smasun
  * @date 2026-05-10
  */
-public interface VendingMachineMapper 
+@Mapper
+public interface VendingMachineMapper
 {
     /**
      * 查询设备管理
@@ -58,4 +61,7 @@ public interface VendingMachineMapper
      * @return 结果
      */
     public int deleteVendingMachineByIds(Long[] ids);
+
+    @Select("select * from tb_vending_machine where node_id=#{id}")
+    List<VendingMachine> selectVendingMachineByNodeId(Long id);
 }

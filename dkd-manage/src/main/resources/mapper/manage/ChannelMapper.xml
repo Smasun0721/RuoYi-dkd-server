@@ -64,7 +64,25 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
             <if test="updateTime != null">#{updateTime},</if>
          </trim>
     </insert>
-
+    
+    <insert id="insertChannelList">
+        insert into tb_channel
+        (channel_code,vm_id,inner_code,max_capacity,current_capacity,last_supply_time,create_time,update_time)
+        values
+        <foreach item="channel" collection="channelList" separator=",">
+            (
+            #{channel.channelCode},
+            #{channel.vmId},
+            #{channel.innerCode},
+            #{channel.maxCapacity},
+            #{channel.currentCapacity},
+            #{channel.lastSupplyTime},
+            #{channel.createTime},
+             #{channel.updateTime}
+            )
+        </foreach>
+    </insert>
+    
     <update id="updateChannel" parameterType="Channel">
         update tb_channel
         <trim prefix="SET" suffixOverrides=",">

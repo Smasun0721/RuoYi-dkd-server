@@ -3,6 +3,7 @@ package com.dkd.manage.mapper;
 import java.util.List;
 import com.dkd.manage.domain.Node;
 import com.dkd.manage.domain.vo.NodeVO;
+import org.apache.ibatis.annotations.Mapper;
 
 /**
  * 点位管理Mapper接口
@@ -10,7 +11,8 @@ import com.dkd.manage.domain.vo.NodeVO;
  * @author Smasun
  * @date 2026-05-06
  */
-public interface NodeMapper 
+@Mapper
+public interface NodeMapper
 {
     /**
      * 查询点位管理
