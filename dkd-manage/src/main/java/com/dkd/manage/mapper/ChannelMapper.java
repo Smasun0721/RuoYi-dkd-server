@@ -2,8 +2,10 @@ package com.dkd.manage.mapper;
 
 import java.util.List;
 import com.dkd.manage.domain.Channel;
+import com.dkd.manage.domain.vo.ChannelVo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.Select;
 
 /**
  * 售货机货道Mapper接口
@@ -69,4 +71,36 @@ public interface ChannelMapper
      * @return 结果
      */
     int insertChannelList(@Param("channelList") List<Channel> channelList);
+
+    /**
+     * 批量删除售货机货道
+     *
+     * @param skuIds 需要删除的数据主键集合
+     * @return 结果
+     */
+    int selectCountBySkuIds(Long[] skuIds);
+
+    /**
+     * 根据售货机编号查询货道列表
+     *
+     * @param innerCode
+     * @return ChannelVo集合
+     */
+    List<ChannelVo> selectChannelVoListByInnerCode(String innerCode);
+
+    /**
+     * 根据售货机编号和货道编号查询货道信息
+     * @param innerCode
+     * @param channelCode
+     * @return 售货机货道
+     */
+    @Select("select * from tb_channel where inner_code =#{innerCode} and channel_code=#{channelCode}")
+    Channel getChannelInfo(@Param("innerCode") String innerCode, @Param("channelCode") String channelCode);
+
+    /**
+     * 批量修改货道
+     * @param list
+     * @return 结果
+     */
+    int batchUpdateChannel(List<Channel> list);
 }
