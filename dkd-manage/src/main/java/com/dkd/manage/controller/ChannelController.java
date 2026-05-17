@@ -110,7 +110,7 @@ public class ChannelController extends BaseController
      */
     @PreAuthorize("@ss.hasPermi('manage:channel:list')")
     @GetMapping("/list/{innerCode}")
-    public AjaxResult lisetByInnerCode(@PathVariable("innerCode") String innerCode) {
+    public AjaxResult listByInnerCode(@PathVariable("innerCode") String innerCode) {
         List<ChannelVo> voList = channelService.selectChannelVoListByInnerCode(innerCode);
         return success(voList);
     }

@@ -64,4 +64,15 @@ public interface VendingMachineMapper
 
     @Select("select * from tb_vending_machine where node_id=#{id}")
     List<VendingMachine> selectVendingMachineByNodeId(Long id);
+
+    /**
+     * 根据设备编号查询设备信息
+     *
+     * @param innerCode
+     * @return VendingMachine
+     */
+    @Select("select * from tb_vending_machine where inner_code=#{innerCode}")
+    VendingMachine selectVendingMachineByInnerCode(String innerCode);
+
+
 }

@@ -2,12 +2,15 @@ package com.dkd.common.core.domain;
 
 import java.io.Serializable;
 import com.dkd.common.constant.HttpStatus;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 响应信息主体
  *
  * @author ruoyi
  */
+@ApiModel(value = "R", description = "响应信息主体")
 public class R<T> implements Serializable
 {
     private static final long serialVersionUID = 1L;
@@ -18,10 +21,13 @@ public class R<T> implements Serializable
     /** 失败 */
     public static final int FAIL = HttpStatus.ERROR;
 
+    @ApiModelProperty("状态码")
     private int code;
 
+    @ApiModelProperty("返回内容")
     private String msg;
 
+    @ApiModelProperty("数据对象")
     private T data;
 
     public static <T> R<T> ok()

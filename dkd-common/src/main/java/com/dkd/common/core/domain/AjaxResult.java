@@ -4,12 +4,15 @@ import java.util.HashMap;
 import java.util.Objects;
 import com.dkd.common.constant.HttpStatus;
 import com.dkd.common.utils.StringUtils;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 操作消息提醒
  * 
  * @author ruoyi
  */
+@ApiModel(value = "AjaxResult", description = "操作消息提醒")
 public class AjaxResult extends HashMap<String, Object>
 {
     private static final long serialVersionUID = 1L;
@@ -22,6 +25,51 @@ public class AjaxResult extends HashMap<String, Object>
 
     /** 数据对象 */
     public static final String DATA_TAG = "data";
+
+    @ApiModelProperty("状态码")
+    private Integer code;
+
+    @ApiModelProperty("返回内容")
+    private String msg;
+
+    @ApiModelProperty("数据对象")
+    private Object data;
+
+    public Integer getCode()
+    {
+        return (Integer) this.get(CODE_TAG);
+    }
+
+    public void setCode(Integer code)
+    {
+        this.code = code;
+        super.put(CODE_TAG, code);
+    }
+
+    public String getMsg()
+    {
+        return (String) this.get(MSG_TAG);
+    }
+
+    public void setMsg(String msg)
+    {
+        this.msg = msg;
+        super.put(MSG_TAG, msg);
+    }
+
+    public Object getData()
+    {
+        return this.get(DATA_TAG);
+    }
+
+    public void setData(Object data)
+    {
+        this.data = data;
+        if (StringUtils.isNotNull(data))
+        {
+            super.put(DATA_TAG, data);
+        }
+    }
 
     /**
      * 初始化一个新创建的 AjaxResult 对象，使其表示一个空消息。

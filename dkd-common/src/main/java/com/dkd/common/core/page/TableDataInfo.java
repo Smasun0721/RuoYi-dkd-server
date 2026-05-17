@@ -2,26 +2,33 @@ package com.dkd.common.core.page;
 
 import java.io.Serializable;
 import java.util.List;
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
 
 /**
  * 表格分页数据对象
  * 
  * @author ruoyi
  */
+@ApiModel(value = "TableDataInfo", description = "表格分页数据对象")
 public class TableDataInfo implements Serializable
 {
     private static final long serialVersionUID = 1L;
 
     /** 总记录数 */
+    @ApiModelProperty("总记录数")
     private long total;
 
     /** 列表数据 */
+    @ApiModelProperty("列表数据")
     private List<?> rows;
 
     /** 消息状态码 */
+    @ApiModelProperty("消息状态码")
     private int code;
 
     /** 消息内容 */
+    @ApiModelProperty("消息内容")
     private String msg;
 
     /**
