@@ -73,6 +73,14 @@ public class ServletUtils
     }
 
     /**
+     * 获取数组参数
+     */
+    public static String[] getParameterValues(String name)
+    {
+        return getRequest().getParameterValues(name);
+    }
+
+    /**
      * 获得所有请求参数
      *
      * @param request 请求对象{@link ServletRequest}
