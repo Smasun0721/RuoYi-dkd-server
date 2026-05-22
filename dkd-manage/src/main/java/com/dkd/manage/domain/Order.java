@@ -1,20 +1,28 @@
 package com.dkd.manage.domain;
 
+
 import org.apache.commons.lang3.builder.ToStringBuilder;
 import org.apache.commons.lang3.builder.ToStringStyle;
 import com.dkd.common.annotation.Excel;
 import com.dkd.common.core.domain.BaseEntity;
-import com.fasterxml.jackson.annotation.JsonFormat;
-import org.springframework.format.annotation.DateTimeFormat;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
 
 /**
  * 订单管理对象 tb_order
- * 
+ *
  * @author Smasun
- * @date 2026-05-19
+ * @date 2026-05-21
  */
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
 public class Order extends BaseEntity
 {
     private static final long serialVersionUID = 1L;
@@ -93,272 +101,7 @@ public class Order extends BaseEntity
     /** 取消原因 */
     private String cancelDesc;
 
-    /** 开始时间（查询用） */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate beginCreateTime;
 
-    /** 结束时间（查询用） */
-    @JsonFormat(pattern = "yyyy-MM-dd")
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate endCreateTime;
-
-    public void setId(String id)
-    {
-        this.id = id;
-    }
-
-    public String getId()
-    {
-        return id;
-    }
-    public void setOrderNo(String orderNo) 
-    {
-        this.orderNo = orderNo;
-    }
-
-    public String getOrderNo() 
-    {
-        return orderNo;
-    }
-    public void setThirdNo(String thirdNo) 
-    {
-        this.thirdNo = thirdNo;
-    }
-
-    public String getThirdNo() 
-    {
-        return thirdNo;
-    }
-    public void setInnerCode(String innerCode) 
-    {
-        this.innerCode = innerCode;
-    }
-
-    public String getInnerCode() 
-    {
-        return innerCode;
-    }
-    public void setChannelCode(String channelCode) 
-    {
-        this.channelCode = channelCode;
-    }
-
-    public String getChannelCode() 
-    {
-        return channelCode;
-    }
-    public void setSkuId(Long skuId) 
-    {
-        this.skuId = skuId;
-    }
-
-    public Long getSkuId() 
-    {
-        return skuId;
-    }
-    public void setSkuName(String skuName) 
-    {
-        this.skuName = skuName;
-    }
-
-    public String getSkuName() 
-    {
-        return skuName;
-    }
-    public void setClassId(Long classId) 
-    {
-        this.classId = classId;
-    }
-
-    public Long getClassId() 
-    {
-        return classId;
-    }
-    public void setStatus(Long status) 
-    {
-        this.status = status;
-    }
-
-    public Long getStatus() 
-    {
-        return status;
-    }
-    public void setAmount(Long amount) 
-    {
-        this.amount = amount;
-    }
-
-    public Long getAmount() 
-    {
-        return amount;
-    }
-    public void setPrice(Long price) 
-    {
-        this.price = price;
-    }
-
-    public Long getPrice() 
-    {
-        return price;
-    }
-    public void setPayType(String payType) 
-    {
-        this.payType = payType;
-    }
-
-    public String getPayType() 
-    {
-        return payType;
-    }
-    public void setPayStatus(Long payStatus) 
-    {
-        this.payStatus = payStatus;
-    }
-
-    public Long getPayStatus() 
-    {
-        return payStatus;
-    }
-    public void setBill(Long bill) 
-    {
-        this.bill = bill;
-    }
-
-    public Long getBill() 
-    {
-        return bill;
-    }
-    public void setAddr(String addr) 
-    {
-        this.addr = addr;
-    }
-
-    public String getAddr() 
-    {
-        return addr;
-    }
-    public void setRegionId(Long regionId) 
-    {
-        this.regionId = regionId;
-    }
-
-    public Long getRegionId() 
-    {
-        return regionId;
-    }
-    public void setRegionName(String regionName) 
-    {
-        this.regionName = regionName;
-    }
-
-    public String getRegionName() 
-    {
-        return regionName;
-    }
-    public void setBusinessType(Long businessType) 
-    {
-        this.businessType = businessType;
-    }
-
-    public Long getBusinessType() 
-    {
-        return businessType;
-    }
-    public void setPartnerId(Long partnerId) 
-    {
-        this.partnerId = partnerId;
-    }
-
-    public Long getPartnerId() 
-    {
-        return partnerId;
-    }
-    public void setOpenId(String openId) 
-    {
-        this.openId = openId;
-    }
-
-    public String getOpenId() 
-    {
-        return openId;
-    }
-    public void setNodeId(Long nodeId) 
-    {
-        this.nodeId = nodeId;
-    }
-
-    public Long getNodeId() 
-    {
-        return nodeId;
-    }
-    public void setNodeName(String nodeName) 
-    {
-        this.nodeName = nodeName;
-    }
-
-    public String getNodeName() 
-    {
-        return nodeName;
-    }
-    public void setCancelDesc(String cancelDesc) 
-    {
-        this.cancelDesc = cancelDesc;
-    }
-
-    public String getCancelDesc() 
-    {
-        return cancelDesc;
-    }
-
-    public void setBeginCreateTime(LocalDate beginCreateTime) 
-    {
-        this.beginCreateTime = beginCreateTime;
-    }
-
-    public LocalDate getBeginCreateTime() 
-    {
-        return beginCreateTime;
-    }
-
-    public void setEndCreateTime(LocalDate endCreateTime) 
-    {
-        this.endCreateTime = endCreateTime;
-    }
-
-    public LocalDate getEndCreateTime() 
-    {
-        return endCreateTime;
-    }
-
-    @Override
-    public String toString() {
-        return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-            .append("id", getId())
-            .append("orderNo", getOrderNo())
-            .append("thirdNo", getThirdNo())
-            .append("innerCode", getInnerCode())
-            .append("channelCode", getChannelCode())
-            .append("skuId", getSkuId())
-            .append("skuName", getSkuName())
-            .append("classId", getClassId())
-            .append("status", getStatus())
-            .append("amount", getAmount())
-            .append("price", getPrice())
-            .append("payType", getPayType())
-            .append("payStatus", getPayStatus())
-            .append("bill", getBill())
-            .append("addr", getAddr())
-            .append("regionId", getRegionId())
-            .append("regionName", getRegionName())
-            .append("businessType", getBusinessType())
-            .append("partnerId", getPartnerId())
-            .append("openId", getOpenId())
-            .append("nodeId", getNodeId())
-            .append("nodeName", getNodeName())
-            .append("cancelDesc", getCancelDesc())
-            .append("createTime", getCreateTime())
-            .append("updateTime", getUpdateTime())
-            .toString();
-    }
 }

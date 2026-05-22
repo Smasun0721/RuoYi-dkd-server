@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>velocity快速入门</title>
+
+</head>
+
+<body>
+
+<h3>心怀梦想，坚持不懈，成功即在前方。${message}</h3>
+<hr>
+
+    ## 创建Velocity变量
+    #set($name = "Velocity")
+<h3>${name}</h3>
+<h3>${name}测试</h3>
+<hr>
+
+<h3>${region}</h3>
+<h3>${region.id}</h3>
+<h3>${region.regionName}</h3>
+<hr>
+
+    #set($list=["春","夏","秋","冬"])
+    #foreach($item in $list)
+    <h3>[$foreach.count] $item</h3>
+    #end
+<hr>
+
+    #foreach($region in $regionList)
+    <h3>${region.id}  ${region.regionName}</h3>
+    #end
+<hr>
+
+## 定义成绩变量
+#set($score = 80)
+#if($score >= 80)
+    <h3>优秀</h3>
+#elseif($score >= 60)
+    <h3>良好</h3>
+#else
+    <h3>不及格</h3>
+#end
+<hr>
+
+
+
+</body>
+
+</html>

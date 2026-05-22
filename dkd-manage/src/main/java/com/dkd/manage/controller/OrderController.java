@@ -1,17 +1,20 @@
 package com.dkd.manage.controller;
 
-import java.time.LocalDate;
 import java.util.List;
-import javax.servlet.http.HttpServletRequest;
+import javax.management.Query;
 import javax.servlet.http.HttpServletResponse;
 
 import com.dkd.manage.domain.dto.OrderQuery;
-import org.springframework.beans.BeanUtils;
-import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.WebDataBinder;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 import com.dkd.common.annotation.Log;
 import com.dkd.common.core.controller.BaseController;
 import com.dkd.common.core.domain.AjaxResult;
@@ -20,38 +23,45 @@ import com.dkd.manage.domain.Order;
 import com.dkd.manage.service.IOrderService;
 import com.dkd.common.utils.poi.ExcelUtil;
 import com.dkd.common.core.page.TableDataInfo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 
 /**
  * 订单管理Controller
  *
  * @author Smasun
- * @date 2026-05-19
+ * @date 2026-05-21
  */
+@Api(tags = "订单管理Controller")
 @RestController
 @RequestMapping("/manage/order")
-public class OrderController extends BaseController {
+public class OrderController extends BaseController
+{
     @Autowired
     private IOrderService orderService;
 
     /**
      * 查询订单管理列表
      */
+    @ApiOperation("查询订单管理列表")
     @PreAuthorize("@ss.hasPermi('manage:order:list')")
     @GetMapping("/list")
-    public TableDataInfo list(OrderQuery query) {
-        // PageHelper 自动分页（pageNum / pageSize 已被 query 接收）
+    public TableDataInfo list(OrderQuery orderQuery)
+    {
         startPage();
-        List<Order> list = orderService.selectOrderListByQuery(query);
+        List<Order> list = orderService.selectOrderListByQuery(orderQuery);
         return getDataTable(list);
     }
 
     /**
      * 导出订单管理列表
      */
+    @ApiOperation("导出订单管理列表")
     @PreAuthorize("@ss.hasPermi('manage:order:export')")
     @Log(title = "订单管理", businessType = BusinessType.EXPORT)
     @PostMapping("/export")
-    public void export(HttpServletResponse response, Order order) {
+    public void export(HttpServletResponse response, Order order)
+    {
         List<Order> list = orderService.selectOrderList(order);
         ExcelUtil<Order> util = new ExcelUtil<Order>(Order.class);
         util.exportExcel(response, list, "订单管理数据");
@@ -60,39 +70,47 @@ public class OrderController extends BaseController {
     /**
      * 获取订单管理详细信息
      */
+    @ApiOperation("获取订单管理详细信息")
     @PreAuthorize("@ss.hasPermi('manage:order:query')")
     @GetMapping(value = "/{id}")
-    public AjaxResult getInfo(@PathVariable("id") Long id) {
+    public AjaxResult getInfo(@PathVariable("id") Long id)
+    {
         return success(orderService.selectOrderById(id));
     }
 
     /**
      * 新增订单管理
      */
-    // @PreAuthorize("@ss.hasPermi('manage:order:add')")
+    @ApiOperation("新增订单管理")
+    @PreAuthorize("@ss.hasPermi('manage:order:add')")
     @Log(title = "订单管理", businessType = BusinessType.INSERT)
     @PostMapping
-    public AjaxResult add(@RequestBody Order order) {
+    public AjaxResult add(@RequestBody Order order)
+    {
         return toAjax(orderService.insertOrder(order));
     }
 
     /**
      * 修改订单管理
      */
+    @ApiOperation("修改订单管理")
     @PreAuthorize("@ss.hasPermi('manage:order:edit')")
     @Log(title = "订单管理", businessType = BusinessType.UPDATE)
     @PutMapping
-    public AjaxResult edit(@RequestBody Order order) {
+    public AjaxResult edit(@RequestBody Order order)
+    {
         return toAjax(orderService.updateOrder(order));
     }
 
     /**
      * 删除订单管理
      */
+    @ApiOperation("删除订单管理")
     @PreAuthorize("@ss.hasPermi('manage:order:remove')")
     @Log(title = "订单管理", businessType = BusinessType.DELETE)
     @DeleteMapping("/{ids}")
-    public AjaxResult remove(@PathVariable Long[] ids) {
+    public AjaxResult remove(@PathVariable Long[] ids)
+    {
         return toAjax(orderService.deleteOrderByIds(ids));
     }
 }
