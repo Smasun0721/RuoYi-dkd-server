@@ -7,6 +7,12 @@
 
 基于 RuoYi 3.8.7 脚手架二次开发的“帝可得”后台管理系统服务端，包含商品、货道、工单、订单、策略和设备等业务模块。
 
+## 系统架构
+
+![DKD 后台管理系统架构](docs/architecture.png)
+
+前端通过 REST API 调用 dkd-admin，业务逻辑位于 dkd-manage，系统管理位于 dkd-system，数据存储使用 MySQL，缓存和会话使用 Redis。
+
 ## 功能模块
 
 | 模块 | 说明 |
