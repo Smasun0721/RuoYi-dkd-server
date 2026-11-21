@@ -1,7 +1,7 @@
 # 帝可得后台管理系统（服务端）
 
 ![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)
-![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-2.5-6DB33F?logo=springboot&logoColor=white)
 ![RuoYi](https://img.shields.io/badge/Framework-RuoYi%203.8.7-4B6BFB)
 ![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?logo=mysql&logoColor=white)
 
