@@ -1,19 +1,84 @@
-<p align="center" >
-<span style="background-color: #5373e0;display: inline-block"> 
-<img alt="logo" src="https://likede2-admin.itheima.net/img/logo.3673fab5.png">
-</span>
-</p>
-<h1 align="center" style="margin: 30px 0 30px; font-weight: bold;">帝可得</h1>
-<h4 align="center">基于RuoYi（SpringBoot+Vue前后端分离）的Java快速开发框架</h4>
+# 帝可得后台管理系统（服务端）
 
+![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white)
+![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.x-6DB33F?logo=springboot&logoColor=white)
+![RuoYi](https://img.shields.io/badge/Framework-RuoYi%203.8.7-4B6BFB)
+![MySQL](https://img.shields.io/badge/Database-MySQL-4479A1?logo=mysql&logoColor=white)
 
-## 背景介绍
+基于 RuoYi 3.8.7 脚手架二次开发的“帝可得”后台管理系统服务端，包含商品、货道、工单、订单、策略和设备等业务模块。
 
-智能售货机项目是随着互联网及物联网技术的普及及发展，运用现有技术对传统售货机进行改造升级，从B端角度来提升传统售货机的的运营、运维效率，通过运营数据的采集和分析不断优化运营方案，降低运营、运维成本，缩短B端用户的盈利周期，针对不同的摆放点位及商业场景，匹配的不同机型及不同的商品供B端用户贴合自身特点来快速实现商业价值；针对C端用户的购物体验，将传统的纸币硬币购物流程替换成支付宝、微信、银联等线上扫码支付(或刷脸支付)等快捷支付方式。
+## 功能模块
 
-业务模式分为，自营模式、加盟模式或点位主分成模式等。
+| 模块 | 说明 |
+| --- | --- |
+| 商品管理 | 商品信息维护与分类 |
+| 货道管理 | 货道、库存与设备关联 |
+| 工单管理 | 运维工单创建、流转与查询 |
+| 订单管理 | 订单查询与状态处理 |
+| 策略管理 | 运营策略配置 |
+| 设备管理 | 设备信息与状态维护 |
 
-## 业务介绍
-随着售货机平台方运营售货机设备数量及点位数量越来越多，为了降低成本加快运营和运维效率将有限的资源迅速变现，平台方将系统做了切分，其中客户端包含三个：面向维修人员的运维客户端，主要用来跟踪和解决维修人员的日常工作和及时处理设备故障；运营客户端，主要用来提高日常运营效率，减少缺货设备，提高设备的盈利能力；C端用户客户端，面向C端用户的客户端，提高用户体验，缩短用户购物流程。
+## 技术栈
 
-为了更好的针对不同B端用户的使用习惯，平台端切分为两个端：平台管理端，主要为了管理设备、货道、商品、工单及运营、运维数据。合作商后台：针对有大量点位但是没有运营能力的用户提供数据接入和销售分成的管理。
+- Java 17、Spring Boot、Spring MVC
+- MyBatis、PageHelper、Druid
+- MySQL、Redis
+- JWT、AOP、Quartz
+- Maven 多模块
+
+## 环境要求
+
+- JDK 17+
+- Maven 3.8+
+- MySQL 8.0+
+- Redis 6.0+
+
+## 配置
+
+核心配置位于 dkd-admin/src/main/resources/application.yml 和 application-druid.yml。
+
+数据库默认库名：dkd。数据库脚本位于 sql/ 目录。
+
+敏感配置已改为环境变量：
+
+~~~bash
+export MYSQL_USERNAME=root
+export MYSQL_PASSWORD=your-secret-here
+export REDIS_PASSWORD=
+export TOKEN_SECRET=change-me
+~~~
+
+## 启动方式
+
+1. 创建 MySQL 数据库 dkd，并导入 sql/ 下的脚本；
+2. 启动 Redis；
+3. 在项目根目录执行：
+
+~~~bash
+mvn clean package
+java -jar dkd-admin/target/dkd-admin.jar
+~~~
+
+或在 IntelliJ IDEA 中运行 com.dkd.DkdApplication。
+
+## 关联仓库
+
+- 前端：[RuoYi-dkd-client](https://github.com/Smasun0721/RuoYi-dkd-client)
+
+## 目录结构
+
+~~~text
+RuoYi-dkd-server/
+├── dkd-admin/          # 启动模块与配置
+├── dkd-common/         # 通用工具
+├── dkd-framework/      # 框架配置
+├── dkd-generator/      # 代码生成
+├── dkd-manage/         # 业务模块
+├── dkd-quartz/         # 定时任务
+├── dkd-system/         # 系统模块
+└── sql/                # 数据库脚本
+~~~
+
+## 说明
+
+本项目基于 RuoYi 3.8.7 脚手架二次开发，保留原框架结构；业务代码在此基础上实现商品、货道、工单、订单等管理功能。
