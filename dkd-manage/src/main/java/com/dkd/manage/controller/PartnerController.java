@@ -112,7 +112,7 @@ public class PartnerController extends BaseController
     public AjaxResult resetPwd(@PathVariable Long id){
         Partner partner = new Partner();
         partner.setId(id);
-        partner.setPassword(SecurityUtils.encryptPassword(System.getenv().getOrDefault("USER_RESET_PASSWORD", "ChangeMe123!")));
+        partner.setPassword(SecurityUtils.encryptPassword(System.getenv().getOrDefault("USER_RESET_PASSWORD", "change-me")));
         return toAjax(partnerService.updatePartner(partner));
     }
 
